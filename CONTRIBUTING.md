@@ -85,6 +85,7 @@ chefbundle-codegen:
 
   * .gitignore
   * Berksfile
+  * CHANGELOG.md
   * chefignore
   * CONTRIBUTING.md
   * metadata.rb
