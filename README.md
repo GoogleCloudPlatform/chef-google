@@ -25,7 +25,7 @@ as well.
 
 To install this cookbook, insert the following into your Berksfile.
 
-    cookbook 'google-cloud', '~> 0.1.0'
+    cookbook 'google-cloud', '~> 0.2.0'
 
 ## Supported Google Cloud Platform Products
 
@@ -36,6 +36,7 @@ The `google/cloud` cookbook installs the following cookbooks automatically:
   - [Google Cloud DNS](#google-cloud-dns)
   - [Google Cloud SQL](#google-cloud-sql)
   - [Google Cloud Storage](#google-cloud-storage)
+  - [Google Stackdriver Logging](#google-stackdriver-logging)
   - [Google Authentication](#google-authentication)
 
 
@@ -110,9 +111,22 @@ The list below is a summary of the supported types by the cookbook:
   networks except the default network, you must create any firewall rules
   you need.
 
+- `gcompute_forwarding_rule`
+  A ForwardingRule resource. A ForwardingRule resource specifies which pool
+  of target virtual machines to forward a packet to if it matches the given
+  [IPAddress, IPProtocol, portRange] tuple.
+
 - `gcompute_global_address`
   Represents a Global Address resource. Global addresses are used for
   HTTP(S) load balancing.
+
+- `gcompute_global_forwarding_rule`
+  Represents a GlobalForwardingRule resource. Global forwarding rules are
+  used to forward traffic to the correct load balancer for HTTP load
+  balancing. Global forwarding rules can only be used for HTTP load
+  balancing.
+  For more information, see
+  https://cloud.google.com/compute/docs/load-balancing/http/
 
 - `gcompute_http_health_check`
   An HttpHealthCheck resource. This resource defines a template for how
@@ -166,6 +180,15 @@ The list below is a summary of the supported types by the cookbook:
   use an instance template. Unlike managed instance groups, you must create
   and add instances to an instance group manually.
 
+- `gcompute_instance_group_manager`
+  Creates a managed instance group using the information that you specify in
+  the request. After the group is created, it schedules an action to create
+  instances in the group using the specified instance template. This
+  operation is marked as DONE when the group is created even if the
+  instances in the group have not yet been created. You must separately
+  verify the status of the individual instances.
+  A managed instance group can have up to 1000 VM instances per group.
+
 - `gcompute_machine_type`
   Represents a MachineType resource. Machine types determine the virtualized
   hardware specifications of your virtual machine instances, such as the
@@ -211,6 +234,18 @@ The list below is a summary of the supported types by the cookbook:
   A Routes resources must have exactly one specification of either
   nextHopGateway, nextHopInstance, nextHopIp, or nextHopVpnTunnel.
 
+- `gcompute_snapshot`
+  Represents a Persistent Disk Snapshot resource.
+  Use snapshots to back up data from your persistent disks. Snapshots are
+  different from public images and custom images, which are used primarily
+  to create instances or configure instance templates. Snapshots are useful
+  for periodic backup of the data on your persistent disks. You can create
+  snapshots from persistent disks even while they are attached to running
+  instances.
+  Snapshots are incremental, so you can create regular snapshots on a
+  persistent disk faster and at a much lower cost than if you regularly
+  created a full image of the disk.
+
 - `gcompute_ssl_certificate`
   An SslCertificate resource. This resource provides a mechanism to upload
   an SSL key and certificate to the load balancer to serve secure
@@ -237,6 +272,31 @@ The list below is a summary of the supported types by the cookbook:
   region, using their RFC1918 private IP addresses. You can isolate portions
   of the network, even entire subnets, using firewall rules.
 
+- `gcompute_target_http_proxy`
+  Represents a TargetHttpProxy resource, which is used by one or more global
+  forwarding rule to route incoming HTTP requests to a URL map.
+
+- `gcompute_target_https_proxy`
+  Represents a TargetHttpsProxy resource, which is used by one or more
+  global forwarding rule to route incoming HTTPS requests to a URL map.
+
+- `gcompute_target_pool`
+  Represents a TargetPool resource, used for Load Balancing.
+
+- `gcompute_target_ssl_proxy`
+  Represents a TargetSslProxy resource, which is used by one or more
+  global forwarding rule to route incoming SSL requests to a backend
+  service.
+
+- `gcompute_target_tcp_proxy`
+  Represents a TargetTcpProxy resource, which is used by one or more
+  global forwarding rule to route incoming TCP requests to a Backend
+  service.
+
+- `gcompute_url_map`
+  UrlMaps are used to route requests to a backend service based on rules
+  that you define for the host and path of an incoming URL.
+
 - `gcompute_zone`
   Represents a Zone resource.
 
@@ -257,6 +317,9 @@ The list below is a summary of the supported types by the cookbook:
   them during pod scheduling. They may also be resized up or down, to
   accommodate the workload.
 
+- `gcontainer_kube_config`
+  Generates a compatible Kuberenetes '.kube/config' file
+
 ### Google Cloud DNS
 Detailed information can be found at the
 [google-gdns][] project home page.
@@ -273,7 +336,11 @@ The list below is a summary of the supported types by the cookbook:
   including Cloud DNS ManagedZones.
 
 - `gdns_resource_record_set`
-  A unit of data that will be returned by the DNS servers.
+  A single DNS record that exists on a domain name (i.e. in a managed zone).
+  This record defines the information about the domain and where the
+  domain / subdomains direct to.
+  The record will include the domain/subdomain name, a type (i.e. A, AAA,
+  CAA, MX, CNAME, NS, etc)
 
 ### Google Cloud SQL
 Detailed information can be found at the
@@ -336,6 +403,10 @@ The list below is a summary of the supported types by the cookbook:
   and call all BucketAccessControls methods on the bucket.  For more
   information, see Access Control, with the caveat that this API uses
   READER, WRITER, and OWNER instead of READ, WRITE, and FULL_CONTROL.
+
+### Google Stackdriver Logging
+Detailed information can be found at the
+[google-glogging][] project home page.
 
 ### Google Authentication
 
@@ -421,7 +492,8 @@ page.
 [google-gcompute]: https://github.com/GoogleCloudPlatform/chef-google-compute
 [google-gcontainer]: https://github.com/GoogleCloudPlatform/chef-google-container
 [google-gdns]: https://github.com/GoogleCloudPlatform/chef-google-dns
-[google-gsql]: https://github.com/GoogleCloudPlatform/chef-google-compute
+[google-gsql]: https://github.com/GoogleCloudPlatform/chef-google-sql
 [google-gstorage]: https://github.com/GoogleCloudPlatform/chef-google-storage
+[google-glogging]: https://github.com/GoogleCloudPlatform/chef-google-logging
 [google-gauth]: https://github.com/GoogleCloudPlatform/chef-google-auth/blob/master/README.md
 [gcp]: https://cloud.google.com
