@@ -421,7 +421,7 @@ page.
 [google-gcompute]: https://github.com/GoogleCloudPlatform/chef-google-compute
 [google-gcontainer]: https://github.com/GoogleCloudPlatform/chef-google-container
 [google-gdns]: https://github.com/GoogleCloudPlatform/chef-google-dns
-[google-gsql]: https://github.com/GoogleCloudPlatform/chef-google-compute
+[google-gsql]: https://github.com/GoogleCloudPlatform/chef-google-sql
 [google-gstorage]: https://github.com/GoogleCloudPlatform/chef-google-storage
 [google-gauth]: https://github.com/GoogleCloudPlatform/chef-google-auth/blob/master/README.md
 [gcp]: https://cloud.google.com
