@@ -34,6 +34,10 @@ The `google/cloud` cookbook installs the following cookbooks automatically:
   - [Google Compute Engine](#google-compute-engine)
   - [Google Container Engine](#google-container-engine)
   - [Google Cloud DNS](#google-cloud-dns)
+  - [Google Cloud IAM](#google-cloud-iam)
+  - [Google Cloud Pub/Sub](#google-cloud-pub/sub)
+  - [Google Cloud Resource Manager](#google-cloud-resource-manager)
+  - [Google Spanner](#google-spanner)
   - [Google Cloud SQL](#google-cloud-sql)
   - [Google Cloud Storage](#google-cloud-storage)
   - [Google Stackdriver Logging](#google-stackdriver-logging)
@@ -70,7 +74,7 @@ The list below is a summary of the supported types by the cookbook:
 - `gcompute_backend_bucket`
   Backend buckets allow you to use Google Cloud Storage buckets with HTTP(S)
   load balancing.
-  An HTTP(S) load balancing can direct traffic to specified URLs to a
+  An HTTP(S) load balancer can direct traffic to specified URLs to a
   backend bucket rather than a backend service. It can send requests for
   static content to a Cloud Storage bucket and requests for dynamic content
   a virtual machine instance.
@@ -137,9 +141,8 @@ The list below is a summary of the supported types by the cookbook:
   individual VMs should be checked for health, via HTTPS.
 
 - `gcompute_health_check`
-  An HealthCheck resource. This resource defines a template for how
-  individual virtual machines should be checked for health, via one of the
-  supported protocols.
+  An HealthCheck resource. This resource defines a template for how individual virtual machines
+  should be checked for health, via one of the supported protocols.
 
 - `gcompute_instance_template`
   Defines an Instance Template resource that provides configuration settings
@@ -214,6 +217,21 @@ The list below is a summary of the supported types by the cookbook:
   location where you can run your resources. Each region has one or more
   zones
 
+- `gcompute_region_disk`
+  Persistent disks are durable storage devices that function similarly to
+  the physical disks in a desktop or a server. Compute Engine manages the
+  hardware behind these devices to ensure data redundancy and optimize
+  performance for you. Persistent disks are available as either standard
+  hard disk drives (HDD) or solid-state drives (SSD).
+  Persistent disks are located independently from your virtual machine
+  instances, so you can detach or move persistent disks to keep your data
+  even after you delete your instances. Persistent disk performance scales
+  automatically with size, so you can resize your existing persistent disks
+  or add more persistent disks to an instance to meet your performance and
+  storage space requirements.
+  Add a persistent disk to your instance when you need reliable and
+  affordable storage with consistent performance characteristics.
+
 - `gcompute_route`
   Represents a Route resource.
   A route is a rule that specifies how certain packets should be handled by
@@ -231,8 +249,11 @@ The list below is a summary of the supported types by the cookbook:
   machine destination, a virtual machine gateway or a Compute
   Engine-operated gateway. Packets that do not match any route in the
   sending virtual machine's routing table will be dropped.
-  A Routes resources must have exactly one specification of either
+  A Route resource must have exactly one specification of either
   nextHopGateway, nextHopInstance, nextHopIp, or nextHopVpnTunnel.
+
+- `gcompute_router`
+  Represents a Router resource.
 
 - `gcompute_snapshot`
   Represents a Persistent Disk Snapshot resource.
@@ -293,9 +314,16 @@ The list below is a summary of the supported types by the cookbook:
   global forwarding rule to route incoming TCP requests to a Backend
   service.
 
+- `gcompute_target_vpn_gateway`
+  Represents a VPN gateway running in GCP. This virtual device is managed
+  by Google, but used only by you.
+
 - `gcompute_url_map`
   UrlMaps are used to route requests to a backend service based on rules
   that you define for the host and path of an incoming URL.
+
+- `gcompute_vpn_tunnel`
+  VPN tunnel resource.
 
 - `gcompute_zone`
   Represents a Zone resource.
@@ -341,6 +369,58 @@ The list below is a summary of the supported types by the cookbook:
   domain / subdomains direct to.
   The record will include the domain/subdomain name, a type (i.e. A, AAA,
   CAA, MX, CNAME, NS, etc)
+
+### Google Cloud IAM
+Detailed information can be found at the
+[google-giam][] project home page.
+The list below is a summary of the supported types by the cookbook:
+
+
+- `giam_service_account`
+  A service account in the Identity and Access Management API.
+
+- `giam_service_account_key`
+  A service account in the Identity and Access Management API.
+
+### Google Cloud Pub/Sub
+Detailed information can be found at the
+[google-gpubsub][] project home page.
+The list below is a summary of the supported types by the cookbook:
+
+
+- `gpubsub_topic`
+  A named resource to which messages are sent by publishers.
+
+- `gpubsub_subscription`
+  A named resource representing the stream of messages from a single,
+  specific topic, to be delivered to the subscribing application.
+
+### Google Cloud Resource Manager
+Detailed information can be found at the
+[google-gresourcemanager][] project home page.
+The list below is a summary of the supported types by the cookbook:
+
+
+- `gresourcemanager_project`
+  Represents a GCP Project. A project is a container for ACLs, APIs, App
+  Engine Apps, VMs, and other Google Cloud Platform resources.
+
+### Google Spanner
+Detailed information can be found at the
+[google-gspanner][] project home page.
+The list below is a summary of the supported types by the cookbook:
+
+
+- `gspanner_instance_config`
+  A possible configuration for a Cloud Spanner instance. Configurations
+  define the geographic placement of nodes and their replication.
+
+- `gspanner_instance`
+  An isolated set of Cloud Spanner resources on which databases can be
+  hosted.
+
+- `gspanner_database`
+  A Cloud Spanner Database which is hosted on a Spanner instance.
 
 ### Google Cloud SQL
 Detailed information can be found at the
@@ -404,6 +484,30 @@ The list below is a summary of the supported types by the cookbook:
   information, see Access Control, with the caveat that this API uses
   READER, WRITER, and OWNER instead of READ, WRITE, and FULL_CONTROL.
 
+- `gstorage_object_access_control`
+  The ObjectAccessControls resources represent the Access Control Lists
+  (ACLs) for objects within Google Cloud Storage. ACLs let you specify
+  who has access to your data and to what extent.
+  There are two roles that can be assigned to an entity:
+  READERs can get an object, though the acl property will not be revealed.
+  OWNERs are READERs, and they can get the acl property, update an object,
+  and call all objectAccessControls methods on the object. The owner of an
+  object is always an OWNER.
+  For more information, see Access Control, with the caveat that this API
+  uses READER and OWNER instead of READ and FULL_CONTROL.
+
+- `gstorage_default_object_acl`
+  The ObjectAccessControls resources represent the Access Control Lists
+  (ACLs) for objects within Google Cloud Storage. ACLs let you specify
+  who has access to your data and to what extent.
+  There are two roles that can be assigned to an entity:
+  READERs can get an object, though the acl property will not be revealed.
+  OWNERs are READERs, and they can get the acl property, update an object,
+  and call all objectAccessControls methods on the object. The owner of an
+  object is always an OWNER.
+  For more information, see Access Control, with the caveat that this API
+  uses READER and OWNER instead of READ and FULL_CONTROL.
+
 ### Google Stackdriver Logging
 Detailed information can be found at the
 [google-glogging][] project home page.
@@ -461,6 +565,54 @@ page.
     </td>
   </tr>
   <tr>
+    <td>Google Cloud IAM</td>
+    <td>
+      RedHat 6, 7<br/>
+      CentOS 6, 7<br/>
+      Debian 7, 8<br/>
+      Ubuntu 12.04, 14.04, 16.04, 16.10<br/>
+      SLES 11-sp4, 12-sp2<br/>
+      openSUSE 13<br/>
+      Windows Server 2008 R2, 2012 R2, 2012 R2 Core, 2016 R2, 2016 R2 Core
+    </td>
+  </tr>
+  <tr>
+    <td>Google Cloud Pub/Sub</td>
+    <td>
+      RedHat 6, 7<br/>
+      CentOS 6, 7<br/>
+      Debian 7, 8<br/>
+      Ubuntu 12.04, 14.04, 16.04, 16.10<br/>
+      SLES 11-sp4, 12-sp2<br/>
+      openSUSE 13<br/>
+      Windows Server 2008 R2, 2012 R2, 2012 R2 Core, 2016 R2, 2016 R2 Core
+    </td>
+  </tr>
+  <tr>
+    <td>Google Cloud Resource Manager</td>
+    <td>
+      RedHat 6, 7<br/>
+      CentOS 6, 7<br/>
+      Debian 7, 8<br/>
+      Ubuntu 12.04, 14.04, 16.04, 16.10<br/>
+      SLES 11-sp4, 12-sp2<br/>
+      openSUSE 13<br/>
+      Windows Server 2008 R2, 2012 R2, 2012 R2 Core, 2016 R2, 2016 R2 Core
+    </td>
+  </tr>
+  <tr>
+    <td>Google Spanner</td>
+    <td>
+      RedHat 6, 7<br/>
+      CentOS 6, 7<br/>
+      Debian 7, 8<br/>
+      Ubuntu 12.04, 14.04, 16.04, 16.10<br/>
+      SLES 11-sp4, 12-sp2<br/>
+      openSUSE 13<br/>
+      Windows Server 2008 R2, 2012 R2, 2012 R2 Core, 2016 R2, 2016 R2 Core
+    </td>
+  </tr>
+  <tr>
     <td>Google Cloud SQL</td>
     <td>
       RedHat 6, 7<br/>
@@ -492,6 +644,10 @@ page.
 [google-gcompute]: https://github.com/GoogleCloudPlatform/chef-google-compute
 [google-gcontainer]: https://github.com/GoogleCloudPlatform/chef-google-container
 [google-gdns]: https://github.com/GoogleCloudPlatform/chef-google-dns
+[google-giam]: https://github.com/GoogleCloudPlatform/chef-google-iam
+[google-gpubsub]: https://github.com/GoogleCloudPlatform/chef-google-pubsub
+[google-gresourcemanager]: https://github.com/GoogleCloudPlatform/chef-google-resourcemanager
+[google-gspanner]: https://github.com/GoogleCloudPlatform/chef-google-spanner
 [google-gsql]: https://github.com/GoogleCloudPlatform/chef-google-sql
 [google-gstorage]: https://github.com/GoogleCloudPlatform/chef-google-storage
 [google-glogging]: https://github.com/GoogleCloudPlatform/chef-google-logging

@@ -1,4 +1,4 @@
-# Copyright 2017 Google Inc.
+# Copyright 2018 Google Inc.
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -39,6 +39,10 @@ depends 'google-glogging', '< 0.2.0'
 depends 'google-gcompute', '< 0.2.0'
 depends 'google-gcontainer', '< 0.2.0'
 depends 'google-gdns', '< 0.2.0'
+depends 'google-giam', '< 0.2.0'
+depends 'google-gpubsub', '< 0.2.0'
+depends 'google-gresourcemanager', '< 0.2.0'
+depends 'google-gspanner', '< 0.2.0'
 depends 'google-gsql', '< 0.3.0'
 depends 'google-gstorage', '< 0.2.0'
 issues_url 'https://github.com/GoogleCloudPlatform/chef-google/issues' \
