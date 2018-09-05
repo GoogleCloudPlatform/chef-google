@@ -25,7 +25,7 @@ as well.
 
 To install this cookbook, insert the following into your Berksfile.
 
-    cookbook 'google-cloud', '~> 0.2.0'
+    cookbook 'google-cloud', '~> 0.4.0'
 
 ## Supported Google Cloud Platform Products
 

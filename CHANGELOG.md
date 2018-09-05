@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.4.0 (2018-09-04)
+
+### New features
+
+- Update dependencies, version for supermarket release.
+
 ## 0.2.0 (2018-03-16)
 
 ### New features
