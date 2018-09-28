@@ -31,6 +31,7 @@ To install this cookbook, insert the following into your Berksfile.
 
 The `google/cloud` cookbook installs the following cookbooks automatically:
 
+  - [Google Cloud BigQuery](#google-cloud-bigquery)
   - [Google Compute Engine](#google-compute-engine)
   - [Google Container Engine](#google-container-engine)
   - [Google Cloud DNS](#google-cloud-dns)
@@ -51,6 +52,18 @@ its intended behavior. For full details about each provider, properties,
 parameters, usage and examples please visit its respective Chef cookbook project
 page.
 
+
+### Google Cloud BigQuery
+Detailed information can be found at the
+[google-gbigquery][] project home page.
+The list below is a summary of the supported types by the cookbook:
+
+
+- `gbigquery_dataset`
+  Datasets allow you to organize and control access to your tables.
+
+- `gbigquery_table`
+  A Table that belongs to a Dataset
 
 ### Google Compute Engine
 Detailed information can be found at the
@@ -537,6 +550,18 @@ page.
 <table>
   <tr><th>Product</th><th>Operating Systems</th></tr>
   <tr>
+    <td>Google Cloud BigQuery</td>
+    <td>
+      RedHat 6, 7<br/>
+      CentOS 6, 7<br/>
+      Debian 7, 8<br/>
+      Ubuntu 12.04, 14.04, 16.04, 16.10<br/>
+      SLES 11-sp4, 12-sp2<br/>
+      openSUSE 13<br/>
+      Windows Server 2008 R2, 2012 R2, 2012 R2 Core, 2016 R2, 2016 R2 Core
+    </td>
+  </tr>
+  <tr>
     <td>Google Compute Engine</td>
     <td>
       RedHat 6, 7<br/>
@@ -649,6 +674,7 @@ page.
 
 [supported-products]: #supported-google-cloud-platform-products
 [supported-types]: #summary-of-supported-products-types--providers
+[google-gbigquery]: https://github.com/GoogleCloudPlatform/chef-google-bigquery
 [google-gcompute]: https://github.com/GoogleCloudPlatform/chef-google-compute
 [google-gcontainer]: https://github.com/GoogleCloudPlatform/chef-google-container
 [google-gdns]: https://github.com/GoogleCloudPlatform/chef-google-dns
